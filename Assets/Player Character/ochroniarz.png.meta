@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ochroniarz_0: 5991612305576544281
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

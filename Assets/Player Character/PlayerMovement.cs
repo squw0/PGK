@@ -64,19 +64,44 @@ public class PlayerMovement : MonoBehaviour{
         transform.localScale = new Vector3(direction, 1, 1);
     }
 
-    void HandleJump(){
-        if (Input.GetButtonDown("Jump") && grounded) {
-            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
-        }
+    // void HandleJump(){
+    //     if (Input.GetButtonDown("Jump") && grounded) {
+    //         body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+    //     }
+    // }
+
+    // void HandleJump(){
+    //     if (Mathf.Abs(yInput) > 0 && grounded) {
+    //         body.velocity = new Vector2(body.velocity.x, yInput * jumpSpeed);
+    //     }
+    // }
+
+    // void HandleJump(){
+    //     if (Input.GetButtonDown("Jump") && grounded) {
+    //         body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+    //     }
+    // }
+
+    void HandleJump() {
+    // Sprawdź, czy przycisk "Jump" (spacja) został naciśnięty i czy postać jest na ziemi
+    if (Input.GetButtonDown("Jump") && grounded) {
+        body.velocity = new Vector2(body.velocity.x, jumpSpeed);
     }
+}
 
     void CheckGround(){
         grounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0;
     }
 
+    // void ApplyFriction(){
+    //    if (grounded && xInput == 0 && yInput == 0 ){
+    //         body.velocity *= groundDecay;
+    //     } 
+    // }
+
     void ApplyFriction(){
-       if (grounded && xInput == 0 && body.velocity.y <= 0 ){
-            body.velocity *= groundDecay;
-        } 
-    }
+    if (grounded && xInput == 0) {
+        body.velocity = new Vector2(body.velocity.x * groundDecay, body.velocity.y);
+    } 
+}
 }
