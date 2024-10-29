@@ -1,83 +1,83 @@
-// using System;
-// using System.Collections;
-// using System.Collections.Generic;
-// using Unity.VisualScripting;
-// using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 
-// public class PlayerMovement : MonoBehaviour{
+public class PlayerMovement : MonoBehaviour{
 
-//     public Rigidbody2D body;
+    public Rigidbody2D body;
 
-//     public BoxCollider2D groundCheck;
+    public BoxCollider2D groundCheck;
 
-//     public LayerMask groundMask;
+    public LayerMask groundMask;
 
-//     public float acceleration;
-//     [Range(0f, 1f)]
-//     public float groundDecay;
-//     public float maxXSpeed;
+    public float acceleration;
+    [Range(0f, 1f)]
+    public float groundDecay;
+    public float maxXSpeed;
 
 
-//     public float jumpSpeed;
+    public float jumpSpeed;
 
-// /// <summary>
-// /// heheszki
-// /// </summary>
-//     public bool grounded;
+/// <summary>
+/// heheszki
+/// </summary>
+    public bool grounded;
 
-//     float xInput;
+    float xInput;
 
-//     float yInput;
+    float yInput;
 
-//     void Update(){
-//         CheckInput();
-//         HandleJump();
-//     }
+    void Update(){
+        CheckInput();
+        HandleJump();
+    }
 
-//     void FixedUpdate() {
-//         CheckGround();
-//         HandleXMovement();
-//         ApplyFriction();
-//     }
+    void FixedUpdate() {
+        CheckGround();
+        HandleXMovement();
+        ApplyFriction();
+    }
 
-//     void CheckInput(){
-//         xInput = Input.GetAxis("Horizontal");
-//         yInput = Input.GetAxis("Vertical");
-//     }
+    void CheckInput(){
+        xInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
+    }
 
-//     void HandleXMovement(){
-//         if (Mathf.Abs(xInput) > 0) {
+    void HandleXMovement(){
+        if (Mathf.Abs(xInput) > 0) {
 
-//             // zwiekszanie przyspieszenia i prędkości a clamp to żeby się nie zwiększały w nieskończoność
-//             float increment = xInput * acceleration;
-//             float newSpeed = Mathf.Clamp(body.velocity.x + increment, -maxXSpeed, maxXSpeed); //zamiast groundspeed jest maXSpeed
-//             body.velocity = new Vector2(newSpeed, body.velocity.y);
+            // zwiekszanie przyspieszenia i prędkości a clamp to żeby się nie zwiększały w nieskończoność
+            float increment = xInput * acceleration;
+            float newSpeed = Mathf.Clamp(body.velocity.x + increment, -maxXSpeed, maxXSpeed); //zamiast groundspeed jest maXSpeed
+            body.velocity = new Vector2(newSpeed, body.velocity.y);
 
-//             FaceInput();
-//         }
-//     }
+            FaceInput();
+        }
+    }
 
-//     void FaceInput(){
-//         float direction = Mathf.Sign(xInput);
-//         transform.localScale = new Vector3(direction, 1, 1);
-//     }
+    void FaceInput(){
+        float direction = Mathf.Sign(xInput);
+        transform.localScale = new Vector3(direction, 1, 1);
+    }
 
-//     void HandleJump() {
-//     if (Input.GetButtonDown("Jump") && grounded) {
-//         body.velocity = new Vector2(body.velocity.x, jumpSpeed);
-//     }
-// }
+    void HandleJump() {
+    if (Input.GetButtonDown("Jump") && grounded) {
+        body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+    }
+}
 
-//     void CheckGround(){
-//         grounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0;
-//     }
+    void CheckGround(){
+        grounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0;
+    }
 
-//     void ApplyFriction(){
-//     if (grounded && xInput == 0) {
-//         body.velocity = new Vector2(body.velocity.x * groundDecay, body.velocity.y);
-//     } 
-// }
-// } BUDDA POZDRAWIAM
+    void ApplyFriction(){
+    if (grounded && xInput == 0) {
+        body.velocity = new Vector2(body.velocity.x * groundDecay, body.velocity.y);
+    } 
+}
+} //BUDDA POZDRAWIAM
 
 
 
@@ -268,180 +268,180 @@
 // }
 
 
+// TEN SUPER ALE COŚ ROZJEBAŁO
+// using System.Collections;
+// using UnityEngine;
 
-using System.Collections;
-using UnityEngine;
+// public class PlayerMovement : MonoBehaviour
+// {
+//     public Rigidbody2D body;
+//     public BoxCollider2D groundCheck;
+//     public LayerMask groundMask;
 
-public class PlayerMovement : MonoBehaviour
-{
-    public Rigidbody2D body;
-    public BoxCollider2D groundCheck;
-    public LayerMask groundMask;
+//     [Header("INPUT")]
+//     [Tooltip("Makes all Input snap to an integer. Prevents gamepads from walking slowly. Recommended value is true to ensure gamepad/keybaord parity.")]
+//     public bool SnapInput = true;
 
-    [Header("INPUT")]
-    [Tooltip("Makes all Input snap to an integer. Prevents gamepads from walking slowly. Recommended value is true to ensure gamepad/keybaord parity.")]
-    public bool SnapInput = true;
+//     [Tooltip("Minimum input required before you mount a ladder or climb a ledge. Avoids unwanted climbing using controllers"), Range(0.01f, 0.99f)]
+//     public float VerticalDeadZoneThreshold = 0.3f;
 
-    [Tooltip("Minimum input required before you mount a ladder or climb a ledge. Avoids unwanted climbing using controllers"), Range(0.01f, 0.99f)]
-    public float VerticalDeadZoneThreshold = 0.3f;
+//     [Tooltip("Minimum input required before a left or right is recognized. Avoids drifting with sticky controllers"), Range(0.01f, 0.99f)]
+//     public float HorizontalDeadZoneThreshold = 0.1f;
 
-    [Tooltip("Minimum input required before a left or right is recognized. Avoids drifting with sticky controllers"), Range(0.01f, 0.99f)]
-    public float HorizontalDeadZoneThreshold = 0.1f;
+//     [Header("MOVEMENT")]
+//     [Tooltip("The top horizontal movement speed")]
+//     public float MaxSpeed = 14;
 
-    [Header("MOVEMENT")]
-    [Tooltip("The top horizontal movement speed")]
-    public float MaxSpeed = 14;
+//     [Tooltip("The player's capacity to gain horizontal speed")]
+//     public float Acceleration = 120;
 
-    [Tooltip("The player's capacity to gain horizontal speed")]
-    public float Acceleration = 120;
+//     [Tooltip("The pace at which the player comes to a stop")]
+//     public float GroundDeceleration = 60;
 
-    [Tooltip("The pace at which the player comes to a stop")]
-    public float GroundDeceleration = 60;
+//     [Tooltip("Deceleration in air only after stopping input mid-air")]
+//     public float AirDeceleration = 30;
 
-    [Tooltip("Deceleration in air only after stopping input mid-air")]
-    public float AirDeceleration = 30;
+//     [Tooltip("A constant downward force applied while grounded. Helps on slopes"), Range(0f, -10f)]
+//     public float GroundingForce = -1.5f;
 
-    [Tooltip("A constant downward force applied while grounded. Helps on slopes"), Range(0f, -10f)]
-    public float GroundingForce = -1.5f;
+//     [Tooltip("The detection distance for grounding and roof detection"), Range(0f, 0.5f)]
+//     public float GrounderDistance = 0.05f;
 
-    [Tooltip("The detection distance for grounding and roof detection"), Range(0f, 0.5f)]
-    public float GrounderDistance = 0.05f;
+//     [Header("JUMP")]
+//     [Tooltip("The immediate velocity applied when jumping")]
+//     public float JumpPower = 36;
 
-    [Header("JUMP")]
-    [Tooltip("The immediate velocity applied when jumping")]
-    public float JumpPower = 36;
+//     [Tooltip("The maximum vertical movement speed")]
+//     public float MaxFallSpeed = 40;
 
-    [Tooltip("The maximum vertical movement speed")]
-    public float MaxFallSpeed = 40;
+//     [Tooltip("The player's capacity to gain fall speed. a.k.a. In Air Gravity")]
+//     public float FallAcceleration = 110;
 
-    [Tooltip("The player's capacity to gain fall speed. a.k.a. In Air Gravity")]
-    public float FallAcceleration = 110;
+//     [Tooltip("The gravity multiplier added when jump is released early")]
+//     public float JumpEndEarlyGravityModifier = 3;
 
-    [Tooltip("The gravity multiplier added when jump is released early")]
-    public float JumpEndEarlyGravityModifier = 3;
+//     [Tooltip("The time before coyote jump becomes unusable. Coyote jump allows jump to execute even after leaving a ledge")]
+//     public float CoyoteTime = .15f;
 
-    [Tooltip("The time before coyote jump becomes unusable. Coyote jump allows jump to execute even after leaving a ledge")]
-    public float CoyoteTime = .15f;
+//     [Tooltip("The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
+//     public float JumpBuffer = .2f;
 
-    [Tooltip("The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
-    public float JumpBuffer = .2f;
+//     private bool grounded;
+//     private float xInput;
+//     private bool jumpPressed;
+//     private bool jumpHeld;
+//     private float jumpBufferCounter;
+//     private float coyoteTimeCounter;
+//     private float currentVerticalSpeed;
+//     private float apexPoint;
 
-    private bool grounded;
-    private float xInput;
-    private bool jumpPressed;
-    private bool jumpHeld;
-    private float jumpBufferCounter;
-    private float coyoteTimeCounter;
-    private float currentVerticalSpeed;
-    private float apexPoint;
+//     void Update()
+//     {
+//         CheckInput();
+//         HandleJumpBuffer();
+//     }
 
-    void Update()
-    {
-        CheckInput();
-        HandleJumpBuffer();
-    }
+//     void FixedUpdate()
+//     {
+//         CheckGround();
+//         HandleXMovement();
+//         ApplyFriction();
+//         HandleVariableJumpHeight();
+//         ApplyGravity();
+//         ClampFallSpeed();
+//     }
 
-    void FixedUpdate()
-    {
-        CheckGround();
-        HandleXMovement();
-        ApplyFriction();
-        HandleVariableJumpHeight();
-        ApplyGravity();
-        ClampFallSpeed();
-    }
+//     void CheckInput()
+//     {
+//         xInput = Input.GetAxis("Horizontal");
 
-    void CheckInput()
-    {
-        xInput = Input.GetAxis("Horizontal");
+//         if (SnapInput) 
+//         {
+//             xInput = Mathf.Round(xInput);
+//         }
 
-        if (SnapInput) 
-        {
-            xInput = Mathf.Round(xInput);
-        }
+//         jumpPressed = Input.GetButtonDown("Jump");
+//         jumpHeld = Input.GetButton("Jump");
+//     }
 
-        jumpPressed = Input.GetButtonDown("Jump");
-        jumpHeld = Input.GetButton("Jump");
-    }
+//     void HandleXMovement()
+//     {
+//         if (Mathf.Abs(xInput) > HorizontalDeadZoneThreshold)
+//         {
+//             float increment = xInput * Acceleration * Time.deltaTime;
+//             float newSpeed = Mathf.Clamp(body.velocity.x + increment, -MaxSpeed, MaxSpeed);
+//             body.velocity = new Vector2(newSpeed, body.velocity.y);
+//             FaceInput();
+//         }
+//     }
 
-    void HandleXMovement()
-    {
-        if (Mathf.Abs(xInput) > HorizontalDeadZoneThreshold)
-        {
-            float increment = xInput * Acceleration * Time.deltaTime;
-            float newSpeed = Mathf.Clamp(body.velocity.x + increment, -MaxSpeed, MaxSpeed);
-            body.velocity = new Vector2(newSpeed, body.velocity.y);
-            FaceInput();
-        }
-    }
+//     void FaceInput()
+//     {
+//         float direction = Mathf.Sign(xInput);
+//         transform.localScale = new Vector3(direction, 1, 1);
+//     }
 
-    void FaceInput()
-    {
-        float direction = Mathf.Sign(xInput);
-        transform.localScale = new Vector3(direction, 1, 1);
-    }
+//     void HandleJumpBuffer()
+//     {
+//         if (jumpPressed)
+//             jumpBufferCounter = JumpBuffer;
 
-    void HandleJumpBuffer()
-    {
-        if (jumpPressed)
-            jumpBufferCounter = JumpBuffer;
+//         if (grounded)
+//             coyoteTimeCounter = CoyoteTime;
+//         else
+//             coyoteTimeCounter -= Time.deltaTime;
 
-        if (grounded)
-            coyoteTimeCounter = CoyoteTime;
-        else
-            coyoteTimeCounter -= Time.deltaTime;
+//         if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
+//         {
+//             PerformJump();
+//             jumpBufferCounter = 0;
+//         }
+//         else
+//             jumpBufferCounter -= Time.deltaTime;
+//     }
 
-        if (jumpBufferCounter > 0 && coyoteTimeCounter > 0)
-        {
-            PerformJump();
-            jumpBufferCounter = 0;
-        }
-        else
-            jumpBufferCounter -= Time.deltaTime;
-    }
+//     void PerformJump()
+//     {
+//         currentVerticalSpeed = JumpPower;
+//         body.velocity = new Vector2(body.velocity.x, currentVerticalSpeed);
+//     }
 
-    void PerformJump()
-    {
-        currentVerticalSpeed = JumpPower;
-        body.velocity = new Vector2(body.velocity.x, currentVerticalSpeed);
-    }
+//     void HandleVariableJumpHeight()
+//     {
+//         if (!jumpHeld && currentVerticalSpeed > 0)
+//             currentVerticalSpeed -= FallAcceleration * JumpEndEarlyGravityModifier * Time.deltaTime;
 
-    void HandleVariableJumpHeight()
-    {
-        if (!jumpHeld && currentVerticalSpeed > 0)
-            currentVerticalSpeed -= FallAcceleration * JumpEndEarlyGravityModifier * Time.deltaTime;
+//         if (!grounded)
+//             apexPoint = Mathf.InverseLerp(JumpPower, 0, Mathf.Abs(body.velocity.y));
+//     }
 
-        if (!grounded)
-            apexPoint = Mathf.InverseLerp(JumpPower, 0, Mathf.Abs(body.velocity.y));
-    }
+//     void ApplyGravity()
+//     {
+//         float gravityMultiplier = grounded ? 1f : (apexPoint > 0.5f ? 1f : JumpEndEarlyGravityModifier);
+//         currentVerticalSpeed -= FallAcceleration * gravityMultiplier * Time.deltaTime;
 
-    void ApplyGravity()
-    {
-        float gravityMultiplier = grounded ? 1f : (apexPoint > 0.5f ? 1f : JumpEndEarlyGravityModifier);
-        currentVerticalSpeed -= FallAcceleration * gravityMultiplier * Time.deltaTime;
+//         body.velocity = new Vector2(body.velocity.x + (Mathf.Sign(xInput) * apexPoint * Time.deltaTime), currentVerticalSpeed);
+//     }
 
-        body.velocity = new Vector2(body.velocity.x + (Mathf.Sign(xInput) * apexPoint * Time.deltaTime), currentVerticalSpeed);
-    }
+//     void ClampFallSpeed()
+//     {
+//         if (currentVerticalSpeed < -MaxFallSpeed)
+//             currentVerticalSpeed = -MaxFallSpeed;
+//     }
 
-    void ClampFallSpeed()
-    {
-        if (currentVerticalSpeed < -MaxFallSpeed)
-            currentVerticalSpeed = -MaxFallSpeed;
-    }
+//     void CheckGround()
+//     {
+//         grounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0;
 
-    void CheckGround()
-    {
-        grounded = Physics2D.OverlapAreaAll(groundCheck.bounds.min, groundCheck.bounds.max, groundMask).Length > 0;
+//         if (grounded)
+//             currentVerticalSpeed = Mathf.Max(currentVerticalSpeed, 0);
+//     }
 
-        if (grounded)
-            currentVerticalSpeed = Mathf.Max(currentVerticalSpeed, 0);
-    }
-
-    void ApplyFriction()
-    {
-        if (grounded && Mathf.Abs(xInput) < HorizontalDeadZoneThreshold)
-        {
-            body.velocity = new Vector2(body.velocity.x * GroundDeceleration, body.velocity.y);
-        }
-    }
-}
+//     void ApplyFriction()
+//     {
+//         if (grounded && Mathf.Abs(xInput) < HorizontalDeadZoneThreshold)
+//         {
+//             body.velocity = new Vector2(body.velocity.x * GroundDeceleration, body.velocity.y);
+//         }
+//     }
+// }

@@ -17,16 +17,26 @@ public class AudioManager : MonoBehaviour{
     }
 
     private void Awake(){
-
+        if(Instance !=null && Instance != this){
+            Debug.Log("Destroying duplicate AudioManager Instance");
+            Destroy(this);
+        }
+        else{
+            Debug.Log("Setting AudioManager Instance");
+            Instance = this;
+        }
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void PlayCoinSound(){
-        //Fetch the coin sound
-        //PlayAudioClip(coinSound);
+        PlayAudioClip(coinSound);
+    }
+
+    public void PlayAudioClip(AudioClip clip){
+        audioSource.PlayOneShot(clip);
+    }
+    
+    private void PlayPickupSound(){
+        PlayAudioClip(pickupSound);
     }
 }
-//     private void PlayAudioClip(AudioClip coinSound)
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
