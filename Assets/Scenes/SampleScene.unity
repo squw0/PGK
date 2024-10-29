@@ -1317,11 +1317,21 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 128
-  acceleration: 0.29
-  groundDecay: 0.599
-  maxXSpeed: 4
-  jumpSpeed: 6
-  grounded: 0
+  SnapInput: 1
+  VerticalDeadZoneThreshold: 0.3
+  HorizontalDeadZoneThreshold: 0.1
+  MaxSpeed: 7
+  Acceleration: 10
+  GroundDeceleration: 0.4
+  AirDeceleration: 1.6
+  GroundingForce: -3.42
+  GrounderDistance: 0.05
+  JumpPower: 20.4
+  MaxFallSpeed: 40
+  FallAcceleration: 34.5
+  JumpEndEarlyGravityModifier: 3
+  CoyoteTime: 0.15
+  JumpBuffer: 0.85
 --- !u!114 &683447364
 MonoBehaviour:
   m_ObjectHideFlags: 0
