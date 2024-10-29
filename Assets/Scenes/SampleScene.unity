@@ -1992,6 +1992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1055546515}
   - component: {fileID: 1055546516}
+  - component: {fileID: 1055546517}
   m_Layer: 0
   m_Name: GameFiles
   m_TagString: Untagged
@@ -2027,13 +2028,13 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055546514}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 285658f8418029f449cce99500bfb5c9, type: 3}
   m_Resource: {fileID: 8300000, guid: 285658f8418029f449cce99500bfb5c9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.504
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2117,6 +2118,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1055546517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055546514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 396bbc286d0231349be46e4206941796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinSound: {fileID: 8300000, guid: dcbfec96b5bbd2b448002b6b703351a7, type: 3}
+  pickupSound: {fileID: 8300000, guid: dcbfec96b5bbd2b448002b6b703351a7, type: 3}
 --- !u!1 &1099218488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,7 +2503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinSound: {fileID: 8300000, guid: dcbfec96b5bbd2b448002b6b703351a7, type: 3}
-  pickupSound: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: dcbfec96b5bbd2b448002b6b703351a7, type: 3}
 --- !u!1 &1135321087
 GameObject:
   m_ObjectHideFlags: 0
